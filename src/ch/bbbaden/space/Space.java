@@ -5,6 +5,7 @@
 package ch.bbbaden.space;
 
 import ch.bbbaden.space.entities.Entity;
+import ch.bbbaden.space.entities.Player;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -27,6 +28,8 @@ public class Space implements IGameObject {
         } catch (SlickException e) {
             Log.error("Fehler: " + e.getMessage());
         }
+        
+        boolean add = mEntities.add(new Player(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT - 50));
     }
 
     public void update(GameContainer container, int delta) {

@@ -8,6 +8,8 @@ import ch.bbbaden.space.IGameObject;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.Log;
 
 /**
  *
@@ -36,6 +38,17 @@ public abstract class Entity implements IGameObject {
     
     public void destroy() {
         mDestroyed = true;
+    }
+    
+    public Entity(int x, int y, String image) {
+        mX = x;
+        mY = y;
+        
+        try {
+            mImage = new Image(image);
+        } catch (SlickException e) {
+            Log.error("Fehler: " + e.getMessage());
+        }
     }
     
     /**

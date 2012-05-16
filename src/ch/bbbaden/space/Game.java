@@ -14,6 +14,7 @@ public class Game extends BasicGame {
 
     public final static int SCREEN_WIDTH = 640;
     public final static int SCREEN_HEIGHT = 480;
+    public final static float PLAYER_SPEED = 0.2f;
     
     Space mSpace;
 
