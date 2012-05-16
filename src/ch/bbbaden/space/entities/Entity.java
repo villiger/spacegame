@@ -46,6 +46,7 @@ public abstract class Entity implements IGameObject {
         
         try {
             mImage = new Image(image);
+            mSize = (mImage.getWidth() + mImage.getHeight()) / 4;
         } catch (SlickException e) {
             Log.error("Fehler: " + e.getMessage());
         }
