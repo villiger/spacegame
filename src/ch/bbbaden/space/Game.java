@@ -14,6 +14,8 @@ public class Game extends BasicGame {
 
     public final static int SCREEN_WIDTH = 640;
     public final static int SCREEN_HEIGHT = 480;
+    
+    Space mSpace;
 
     public Game() {
         super("Space");
@@ -32,17 +34,17 @@ public class Game extends BasicGame {
 
     @Override
     public void init(GameContainer container) throws SlickException {
-
+        mSpace = new Space();
     }
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
-
+        mSpace.update(container, delta);
     }
 
     @Override
     public void render(GameContainer container, Graphics graphics) throws SlickException {
-        
+        mSpace.render(container, graphics);
     }
 
 }
