@@ -37,6 +37,27 @@ public abstract class Entity implements IGameObject {
     public void destroy() {
         mDestroyed = true;
     }
+    
+    /**
+     * Check if this Entity collides with another Entity.
+     * They collide only if the types of both Entities are different.
+     * 
+     * @param other The other entity
+     * @return boolean
+     */
+    public boolean coolides(Entity other) {
+        if (getType() != other.getType()) {
+            float dx = getX() - other.getX();
+            float dy = getY() - other.getY();
+            float distance = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+            float sizes = getSize() + other.getSize();
+            if (sizes > distance) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     public void render(GameContainer container, Graphics graphics) {
         int imageWidth = mImage.getWidth();
