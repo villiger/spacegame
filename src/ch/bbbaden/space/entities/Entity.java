@@ -45,7 +45,7 @@ public abstract class Entity implements IGameObject {
      * @param other The other entity
      * @return boolean
      */
-    public boolean coolides(Entity other) {
+    public boolean collides(Entity other) {
         if (getType() != other.getType()) {
             float dx = getX() - other.getX();
             float dy = getY() - other.getY();
