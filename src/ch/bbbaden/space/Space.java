@@ -4,6 +4,7 @@
  */
 package ch.bbbaden.space;
 
+import ch.bbbaden.space.entities.Entity;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -18,7 +19,7 @@ import org.newdawn.slick.util.Log;
 public class Space implements IGameObject {
     
     Image mBackgroundImage;
-    ArrayList<IGameObject> mEntities = new ArrayList<IGameObject>();
+    ArrayList<Entity> mEntities = new ArrayList<Entity>();
     
     public Space() {
         try {
@@ -29,7 +30,7 @@ public class Space implements IGameObject {
     }
 
     public void update(GameContainer container, int delta) {
-        for (IGameObject entity : mEntities) {
+        for (Entity entity : mEntities) {
             entity.update(container, delta);
         }
     }
@@ -37,7 +38,7 @@ public class Space implements IGameObject {
     public void render(GameContainer container, Graphics graphics) {
         mBackgroundImage.draw();
         
-        for (IGameObject entity : mEntities) {
+        for (Entity entity : mEntities) {
             entity.render(container, graphics);
         }
     }
