@@ -5,6 +5,7 @@
 package ch.bbbaden.space.entities;
 
 import ch.bbbaden.space.IGameObject;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.ExplicitGroup;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -20,7 +21,8 @@ public abstract class Entity implements IGameObject {
     public enum Type {
         Player,
         Meteor,
-        Shot
+        Shot,
+        Explosion
     }
     
     protected float mX;
@@ -61,7 +63,10 @@ public abstract class Entity implements IGameObject {
      * @return boolean
      */
     public boolean collides(Entity other) {
-        if (getType() != other.getType()) {
+        if (getType() != other.getType() &&
+            getType() != Type.Explosion &&
+            other.getType() != Type.Explosion) {
+            
             float dx = getX() - other.getX();
             float dy = getY() - other.getY();
             float distance = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));

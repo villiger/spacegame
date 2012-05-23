@@ -53,7 +53,7 @@ public class Player extends Entity {
         }
         
         mTimeSinceLastShot += delta;
-        if (mTimeSinceLastShot > Game.SHOT_DELAY && input.isKeyDown(Input.KEY_SPACE)) {
+        if (mTimeSinceLastShot > Game.TIME_BETWEEN_SHOTS && input.isKeyDown(Input.KEY_SPACE)) {
             mTimeSinceLastShot = 0;
             mSpace.addEntity(new Shot(mX, mY - 25));
         }

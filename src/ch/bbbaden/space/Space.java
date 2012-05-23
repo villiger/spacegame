@@ -22,6 +22,7 @@ public class Space implements IGameObject {
     
     private Image mBackgroundImage;
     private ArrayList<Entity> mEntities = new ArrayList<Entity>();
+    private ArrayList<Explosion> mExplosions = new ArrayList<Explosion>();
     private int mTimeSinceLastMeteor;
     
     public Space() {
@@ -47,6 +48,11 @@ public class Space implements IGameObject {
                if (entity.collides(other)) {
                    entity.destroy();
                    other.destroy();
+                   
+                   float x = (entity.getX() + other.getX()) / 2.f;
+                   float y = (entity.getY() + other.getY()) / 2.f;
+                   
+                   mExplosions.add(Explosion.createExplosion(x, y));
                }
             }
         }
@@ -59,9 +65,17 @@ public class Space implements IGameObject {
             }
         }
         
+        // clean up all explosions
+        for (int i = mExplosions.size() - 1; i >= 0; i--) {
+            Explosion explosion = mExplosions.get(i);
+            if (explosion.isStopped()) {
+                mExplosions.remove(explosion);
+            }
+        }
+        
         // add new meteors
         mTimeSinceLastMeteor += delta;
-        if (mTimeSinceLastMeteor > Game.METEOR_DELAY) {
+        if (mTimeSinceLastMeteor > Game.TIME_BETWEEN_METEORS) {
             mTimeSinceLastMeteor = 0;
             addEntity(Meteor.createMeteor());
         }
@@ -70,8 +84,14 @@ public class Space implements IGameObject {
     public void render(GameContainer container, Graphics graphics) {
         mBackgroundImage.draw();
         
+        // render all entities
         for (Entity entity : mEntities) {
             entity.render(container, graphics);
+        }
+        
+        // render all explosions
+        for (Explosion explosion : mExplosions) {
+            explosion.render();
         }
     }
     
