@@ -41,9 +41,9 @@ public class Explosion extends Entity {
     public Explosion(float x, float y) {
         super(x, y, "images/explosion.png");
         
-        mSize = 64;
+        mSize = 32;
         
-        SpriteSheet sprite = new SpriteSheet(mImage, mSize, mSize);
+        SpriteSheet sprite = new SpriteSheet(mImage, mSize * 2, mSize * 2);
         mAnimation = new Animation(sprite, Game.EXPLOSION_FRAME_DURATION);
         mAnimation.setLooping(false);
         mAnimation.stopAt(15);

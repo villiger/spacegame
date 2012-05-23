@@ -4,7 +4,6 @@ import ch.bbbaden.space.entities.Explosion;
 import ch.bbbaden.space.entities.Entity;
 import ch.bbbaden.space.entities.Meteor;
 import ch.bbbaden.space.entities.Player;
-import com.sun.tools.javac.comp.Enter;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -58,22 +57,8 @@ public final class Space implements IGameObject {
                        float y = (entity.getY() + other.getY()) / 2.f;
 
                        addEntity(new Explosion(x, y));
-                       
-                       if (entity.getType() == Entity.Type.Meteor || 
-                           entity.getType() == Entity.Type.Meteor) {
-                           // Add score
-                           addScorePoints(entity.getSize());
-                       }
                    }
                 }
-            }
-        }
-        
-        // Clean up all destroyed entities
-        for (int i = mEntities.size() - 1; i >= 0; i--) {
-            Entity entity = mEntities.get(i);
-            if (entity.isDestroyed()) {
-                removeEntity(entity);
             }
         }
         
