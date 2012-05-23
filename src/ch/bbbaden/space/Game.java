@@ -12,14 +12,14 @@ import org.newdawn.slick.util.Log;
  */
 public class Game extends BasicGame {
 
-    public final static int SCREEN_WIDTH = 640;
-    public final static int SCREEN_HEIGHT = 480;
-    public final static float PLAYER_SPEED = 0.2f;
-    public final static float SHOT_SPEED = 0.4f;
-    public final static float METEOR_SPEED = 0.05f;
-    public final static int TIME_BETWEEN_SHOTS = 200;
-    public final static int TIME_BETWEEN_METEORS = 500;
-    public final static int EXPLOSION_FRAME_DURATION = 50;
+    public final static int     SCREEN_WIDTH                = 640;
+    public final static int     SCREEN_HEIGHT               = 480;
+    public final static float   PLAYER_SPEED                = 0.2f;
+    public final static float   SHOT_SPEED                  = 0.4f;
+    public final static float   METEOR_SPEED                = 0.05f;
+    public final static int     TIME_BETWEEN_SHOTS          = 200;
+    public final static int     TIME_BETWEEN_METEORS        = 500;
+    public final static int     EXPLOSION_FRAME_DURATION    = 50;
     
     Space mSpace;
 
