@@ -34,18 +34,22 @@ public class Player extends Entity {
         
         if (input.isKeyDown(Input.KEY_LEFT)) {
             mX -= delta * Game.PLAYER_SPEED;
+            if (mX < 0) mX = 0;
         }
         
         if (input.isKeyDown(Input.KEY_RIGHT)) {
             mX += delta * Game.PLAYER_SPEED;
+            if (mX > Game.SCREEN_WIDTH) mX = Game.SCREEN_WIDTH;
         }
         
         if (input.isKeyDown(Input.KEY_UP)) {
             mY -= delta * Game.PLAYER_SPEED;
+            if (mY < 0) mY = 0;
         }
         
         if (input.isKeyDown(Input.KEY_DOWN)) {
             mY += delta * Game.PLAYER_SPEED;
+            if (mY > Game.SCREEN_HEIGHT) mY = Game.SCREEN_HEIGHT;
         }
         
         mTimeSinceLastShot += delta;

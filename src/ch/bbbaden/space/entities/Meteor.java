@@ -21,7 +21,10 @@ public class Meteor extends Entity {
         int x = rand.nextInt(Game.SCREEN_WIDTH - 40) + 20;
         int y = -50;
         int which = rand.nextInt(3);
-        float speed = rand.nextInt(50) / 500.f + Game.METEOR_SPEED;
+        
+        // random speed between METEOR_SPEED and METEOR_SPEED + 0.1f
+        float speed = rand.nextInt(100) / 1000.f + Game.METEOR_SPEED;
+        
         return new Meteor(x, y, which, speed);
     }
 
@@ -33,6 +36,7 @@ public class Meteor extends Entity {
     public void update(GameContainer container, int delta) {
         mY += delta * mSpeed;
         
+        // check if y position out of screen boundaries
         if (mY > Game.SCREEN_HEIGHT + 50) {
             destroy();
         }
