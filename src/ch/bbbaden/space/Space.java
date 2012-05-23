@@ -19,8 +19,8 @@ import org.newdawn.slick.util.Log;
  */
 public class Space implements IGameObject {
     
-    Image mBackgroundImage;
-    ArrayList<Entity> mEntities = new ArrayList<Entity>();
+    private Image mBackgroundImage;
+    private ArrayList<Entity> mEntities = new ArrayList<Entity>();
     
     public Space() {
         try {
@@ -29,7 +29,8 @@ public class Space implements IGameObject {
             Log.error("Fehler: " + e.getMessage());
         }
         
-        boolean add = mEntities.add(new Player(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT - 50));
+        Player player = new Player(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT - 50, this);
+        mEntities.add(player);
     }
 
     public void update(GameContainer container, int delta) {

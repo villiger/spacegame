@@ -43,6 +43,7 @@ public abstract class Entity implements IGameObject {
     public Entity(int x, int y, String image) {
         mX = x;
         mY = y;
+        mDestroyed = false;
         
         try {
             mImage = new Image(image);

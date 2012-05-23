@@ -5,6 +5,7 @@
 package ch.bbbaden.space.entities;
 
 import ch.bbbaden.space.Game;
+import ch.bbbaden.space.Space;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
@@ -14,8 +15,11 @@ import org.newdawn.slick.Input;
  */
 public class Player extends Entity {
     
-    public Player(int x, int y) {
+    protected Space mSpace;
+    
+    public Player(int x, int y, Space space) {
         super(x, y, "images/player.png");
+        mSpace = space;
     }
 
     @Override
