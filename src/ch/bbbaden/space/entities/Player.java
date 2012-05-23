@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.bbbaden.space.entities;
 
 import ch.bbbaden.space.Game;
@@ -10,7 +6,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
 /**
- *
  * @author avi
  */
 public class Player extends Entity {
@@ -26,7 +21,7 @@ public class Player extends Entity {
 
     @Override
     public Type getType() {
-        return Entity.Type.Player;
+        return Type.Player;
     }
 
     public void update(GameContainer container, int delta) {

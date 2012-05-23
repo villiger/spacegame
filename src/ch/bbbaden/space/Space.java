@@ -1,29 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.bbbaden.space;
 
+import ch.bbbaden.space.entities.Explosion;
 import ch.bbbaden.space.entities.Entity;
 import ch.bbbaden.space.entities.Meteor;
 import ch.bbbaden.space.entities.Player;
-import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.Log;
+import java.util.ArrayList;
 
 /**
- *
  * @author avi
  */
-public class Space implements IGameObject {
+public final class Space implements IGameObject {
     
     private Image mBackgroundImage;
-    private ArrayList<Entity> mEntities = new ArrayList<Entity>();
-    private ArrayList<Explosion> mExplosions = new ArrayList<Explosion>();
     private int mTimeSinceLastMeteor;
+    private ArrayList<Entity> mEntities = new ArrayList<Entity>();
     
     public Space() {
         try {
@@ -32,17 +27,16 @@ public class Space implements IGameObject {
             Log.error("Fehler: " + e.getMessage());
         }
         
-        Player player = new Player(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT - 50, this);
-        mEntities.add(player);
+        addEntity(new Player(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT - 50, this));
     }
 
     public void update(GameContainer container, int delta) {
-        // update all entities
+        // Update all entities
         for (int i = mEntities.size() - 1; i >= 0; i--) {
             Entity entity = mEntities.get(i);
             entity.update(container, delta);
             
-            // destroy them if they collide
+            // Flag them as destroyed if they collide with another entity
             for (int j = mEntities.size() - 1; j >= 0; j--) {
                Entity other = mEntities.get(j);
                if (entity.collides(other)) {
@@ -52,12 +46,12 @@ public class Space implements IGameObject {
                    float x = (entity.getX() + other.getX()) / 2.f;
                    float y = (entity.getY() + other.getY()) / 2.f;
                    
-                   mExplosions.add(Explosion.createExplosion(x, y));
+                   addEntity(new Explosion(x, y));
                }
             }
         }
         
-        // clean up all destroyed entities
+        // Clean up all destroyed entities
         for (int i = mEntities.size() - 1; i >= 0; i--) {
             Entity entity = mEntities.get(i);
             if (entity.isDestroyed()) {
@@ -65,15 +59,7 @@ public class Space implements IGameObject {
             }
         }
         
-        // clean up all explosions
-        for (int i = mExplosions.size() - 1; i >= 0; i--) {
-            Explosion explosion = mExplosions.get(i);
-            if (explosion.isStopped()) {
-                mExplosions.remove(explosion);
-            }
-        }
-        
-        // add new meteors
+        // Add new meteors
         mTimeSinceLastMeteor += delta;
         if (mTimeSinceLastMeteor > Game.TIME_BETWEEN_METEORS) {
             mTimeSinceLastMeteor = 0;
@@ -84,14 +70,9 @@ public class Space implements IGameObject {
     public void render(GameContainer container, Graphics graphics) {
         mBackgroundImage.draw();
         
-        // render all entities
+        // Render all entities
         for (Entity entity : mEntities) {
             entity.render(container, graphics);
-        }
-        
-        // render all explosions
-        for (Explosion explosion : mExplosions) {
-            explosion.render();
         }
     }
     

@@ -13,6 +13,11 @@ public class Shot extends Entity {
     
     private Sound mSound;
     
+    @Override
+    public Type getType() {
+        return Type.Shot;
+    }
+    
     public Shot(float x, float y) {
         super(x, y, "images/shot.png");
         
@@ -24,15 +29,10 @@ public class Shot extends Entity {
         }
     }
 
-    @Override
-    public Type getType() {
-        return Entity.Type.Shot;
-    }
-
     public void update(GameContainer container, int delta) {
         mY -= delta * Game.SHOT_SPEED;
         
-        // check if y position out of screen boundaries
+        // Check if Y-position out of screen boundaries
         if (mY < -50) {
             destroy();
         }

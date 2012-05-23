@@ -11,6 +11,11 @@ public class Meteor extends Entity {
     
     private float mSpeed;
     
+    @Override
+    public Type getType() {
+        return Type.Meteor;
+    }
+    
     public Meteor(float x, float y, int which, float speed) {
         super(x, y, "images/meteor" + which + ".png");
         mSpeed = speed;
@@ -22,21 +27,16 @@ public class Meteor extends Entity {
         int y = -50;
         int which = rand.nextInt(3);
         
-        // random speed between METEOR_SPEED and METEOR_SPEED + 0.1f
+        // Random speed between METEOR_SPEED and METEOR_SPEED + 0.1f
         float speed = rand.nextInt(100) / 1000.f + Game.METEOR_SPEED;
         
         return new Meteor(x, y, which, speed);
     }
 
-    @Override
-    public Type getType() {
-        return Entity.Type.Meteor;
-    }
-
     public void update(GameContainer container, int delta) {
         mY += delta * mSpeed;
         
-        // check if y position out of screen boundaries
+        // Check if Y-position out of screen boundaries
         if (mY > Game.SCREEN_HEIGHT + 50) {
             destroy();
         }
