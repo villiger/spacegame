@@ -27,11 +27,15 @@ public class Meteor extends Entity {
 
     @Override
     public Type getType() {
-        return Entity.Type.Shot;
+        return Entity.Type.Meteor;
     }
 
     public void update(GameContainer container, int delta) {
         mY += delta * mSpeed;
+        
+        if (mY > Game.SCREEN_HEIGHT + 50) {
+            destroy();
+        }
     }
     
 }

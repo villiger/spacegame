@@ -36,11 +36,30 @@ public class Space implements IGameObject {
     }
 
     public void update(GameContainer container, int delta) {
+        // update all entities
         for (int i = mEntities.size() - 1; i >= 0; i--) {
             Entity entity = mEntities.get(i);
             entity.update(container, delta);
+            
+            // destroy them if they collide
+            for (int j = mEntities.size() - 1; j >= 0; j--) {
+               Entity other = mEntities.get(j);
+               if (entity.collides(other)) {
+                   entity.destroy();
+                   other.destroy();
+               }
+            }
         }
         
+        // clean up all destroyed entities
+        for (int i = mEntities.size() - 1; i >= 0; i--) {
+            Entity entity = mEntities.get(i);
+            if (entity.isDestroyed()) {
+                removeEntity(entity);
+            }
+        }
+        
+        // add new meteors
         mTimeSinceLastMeteor += delta;
         if (mTimeSinceLastMeteor > Game.METEOR_DELAY) {
             mTimeSinceLastMeteor = 0;
@@ -58,6 +77,10 @@ public class Space implements IGameObject {
     
     public void addEntity(Entity entity) {
         mEntities.add(entity);
+    }
+    
+    public void removeEntity(Entity entity) {
+        mEntities.remove(entity);
     }
     
 }

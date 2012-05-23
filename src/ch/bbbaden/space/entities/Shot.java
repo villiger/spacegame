@@ -19,6 +19,10 @@ public class Shot extends Entity {
 
     public void update(GameContainer container, int delta) {
         mY -= delta * Game.SHOT_SPEED;
+        
+        if (mY < -50) {
+            destroy();
+        }
     }
     
 }
