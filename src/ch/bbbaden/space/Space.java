@@ -5,6 +5,7 @@
 package ch.bbbaden.space;
 
 import ch.bbbaden.space.entities.Entity;
+import ch.bbbaden.space.entities.Meteor;
 import ch.bbbaden.space.entities.Player;
 import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
@@ -21,6 +22,7 @@ public class Space implements IGameObject {
     
     private Image mBackgroundImage;
     private ArrayList<Entity> mEntities = new ArrayList<Entity>();
+    private int mTimeSinceLastMeteor;
     
     public Space() {
         try {
@@ -34,8 +36,15 @@ public class Space implements IGameObject {
     }
 
     public void update(GameContainer container, int delta) {
-        for (Entity entity : mEntities) {
+        for (int i = mEntities.size() - 1; i >= 0; i--) {
+            Entity entity = mEntities.get(i);
             entity.update(container, delta);
+        }
+        
+        mTimeSinceLastMeteor += delta;
+        if (mTimeSinceLastMeteor > Game.METEOR_DELAY) {
+            mTimeSinceLastMeteor = 0;
+            addEntity(Meteor.createMeteor());
         }
     }
 
@@ -45,6 +54,10 @@ public class Space implements IGameObject {
         for (Entity entity : mEntities) {
             entity.render(container, graphics);
         }
+    }
+    
+    public void addEntity(Entity entity) {
+        mEntities.add(entity);
     }
     
 }

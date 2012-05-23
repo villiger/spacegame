@@ -16,10 +16,12 @@ import org.newdawn.slick.Input;
 public class Player extends Entity {
     
     protected Space mSpace;
+    protected int mTimeSinceLastShot;
     
-    public Player(int x, int y, Space space) {
+    public Player(float x, float y, Space space) {
         super(x, y, "images/player.png");
         mSpace = space;
+        mTimeSinceLastShot = 0;
     }
 
     @Override
@@ -44,6 +46,12 @@ public class Player extends Entity {
         
         if (input.isKeyDown(Input.KEY_DOWN)) {
             mY += delta * Game.PLAYER_SPEED;
+        }
+        
+        mTimeSinceLastShot += delta;
+        if (mTimeSinceLastShot > Game.SHOT_DELAY && input.isKeyDown(Input.KEY_SPACE)) {
+            mTimeSinceLastShot = 0;
+            mSpace.addEntity(new Shot(mX, mY - 15));
         }
     }
     

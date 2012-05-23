@@ -40,7 +40,7 @@ public abstract class Entity implements IGameObject {
         mDestroyed = true;
     }
     
-    public Entity(int x, int y, String image) {
+    public Entity(float x, float y, String image) {
         mX = x;
         mY = y;
         mDestroyed = false;
